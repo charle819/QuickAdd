@@ -16,5 +16,9 @@ CREATE TABLE IF NOT EXISTS public.t_user
 
 
 INSERT INTO t_user(t_user_id, first_name, last_name, email, user_name, password,  contact_no, is_active, created_on, updated_on)
-VALUES (1, 'Luke', 'Skywalker', 'luke@company.com', 'luke', 'Pass@123','+91-1212222221', 'Y', current_timestamp, current_timestamp),
-(2, 'Anakin', 'Skywalker', 'anakin@company.com', 'anakin', 'Pass@123','+91-121444543', 'Y', current_timestamp, current_timestamp);
+SELECT 1, 'Luke', 'Skywalker', 'luke@company.com', 'luke', 'Pass@123','+91-1212222221', 'Y', current_timestamp, current_timestamp
+WHERE NOT EXISTS (select 1 from t_user where user_name='luke' and email ='luke@company.com');
+
+INSERT INTO t_user(t_user_id, first_name, last_name, email, user_name, password,  contact_no, is_active, created_on, updated_on)
+SELECT 2, 'Anakin', 'Skywalker', 'anakin@company.com', 'anakin', 'Pass@123','+91-121444543', 'Y', current_timestamp, current_timestamp
+WHERE NOT EXISTS (select 1 from t_user where user_name='anakin' and email ='anakin@company.com');
